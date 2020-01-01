@@ -70,7 +70,7 @@ namespace XamarinNUnitRunner.Test.Filter
 
             Assert.Throws(
                 Is.TypeOf<ArgumentOutOfRangeException>().And.Message
-                    .EqualTo("The given element type is not supported. (Parameter 'elementType')\r\n" +
+                    .EqualTo($"The given element type is not supported. (Parameter 'elementType'){Environment.NewLine}" +
                              $"Actual value was {elementType}."),
                 // ReSharper disable once ObjectCreationAsStatement
                 () => new NUnitFilterElement(parent, elementType, name, false, value));

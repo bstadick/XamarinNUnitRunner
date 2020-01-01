@@ -115,7 +115,7 @@ namespace XamarinNUnitRunner.Test.Filter
                 Is.TypeOf<ArgumentOutOfRangeException>().And.Message
                     .EqualTo(
                         $"The given element type is not supported. {currentString}" +
-                        " (Parameter 'ElementType')\r\nActual value was -1."),
+                        $" (Parameter 'ElementType'){Environment.NewLine}Actual value was -1."),
                 () => NUnitFilter.Build(leafChild));
         }
 

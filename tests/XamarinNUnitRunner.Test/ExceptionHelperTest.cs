@@ -80,7 +80,7 @@ namespace XamarinNUnitRunner.Test
             string expectedArg = arg != null && arg.Equals("parameter") ? " parameter" : arg;
             string expected = $"The given element type is not supported.{expectedArg}" +
                               (string.IsNullOrEmpty(paramName) ? string.Empty : $" (Parameter '{paramName}')") +
-                              (isValueNull ? string.Empty : $"\r\nActual value was {actualValue}.");
+                              (isValueNull ? string.Empty : $"{Environment.NewLine}Actual value was {actualValue}.");
 
             ArgumentOutOfRangeException exception =
                 ExceptionHelper.ThrowArgumentOutOfRangeExceptionForElementTypeEnum(paramName, actualValue, arg);
@@ -108,7 +108,7 @@ namespace XamarinNUnitRunner.Test
 
             string expected = $"The {paramName} must be greater than or equal to 0." +
                               (string.IsNullOrEmpty(paramName) ? string.Empty : $" (Parameter '{paramName}')") +
-                              (isValueNull ? string.Empty : $"\r\nActual value was {actualValue}.");
+                              (isValueNull ? string.Empty : $"{Environment.NewLine}Actual value was {actualValue}.");
 
             ArgumentOutOfRangeException exception =
                 ExceptionHelper.ThrowArgumentOutOfRangeExceptionForValueLessThanZero(paramName, actualValue);
