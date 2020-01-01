@@ -1,0 +1,16 @@
+﻿[*.cs]
+
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = suggestion
+
+# IDE0028: Simplify collection initialization
+dotnet_style_collection_initializer = true:none
+
+# IDE0017: Simplify object initialization
+dotnet_style_object_initializer = true:none
+
+# CA1716: Identifiers should not match keywords
+dotnet_diagnostic.CA1716.severity = suggestion
+
+# CS0659: Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
+dotnet_diagnostic.CS0659.severity = suggestion

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:XamarinNUnitRunner.ViewModels;assembly=XamarinNUnitRunner"
+             xmlns:models="clr-namespace:XamarinNUnitRunner.Models;assembly=XamarinNUnitRunner"
+             xmlns:resources="clr-namespace:XamarinNUnitRunner.Resources;assembly=XamarinNUnitRunner"
+             mc:Ignorable="d"
+             x:Class="XamarinNUnitRunner.Views.TestsPage"
+             Title="{Binding Title}"
+             x:Name="BrowseItemsPage"
+             x:DataType="viewModels:TestsViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:Resource.RunTestsButton}" Clicked="RunTestsClicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <ListView ItemsSource="{Binding Tests}"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  RefreshCommand="{Binding LoadTestsCommand}"
+                  IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  CachingStrategy="RecycleElement"
+                  ItemSelected="OnItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell x:DataType="models:NUnitTest">
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding DisplayName}"
+                                   d:Text="{Binding .}"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   FontSize="16" />
+                            <Label Text="{Binding Test.Id}"
+                                   d:Text="Test id"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                            <Label Text="{Binding Test.TestCaseCount}"
+                                   d:Text="Test count"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                            <Label Text="{Binding Test.ClassName}"
+                                   d:Text="Test class name"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                            <Label Text="{Binding Test.MethodName}"
+                                   d:Text="Test method name"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
