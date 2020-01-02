@@ -209,8 +209,68 @@
     <value>Test not executed.</value>
     <comment>Displayed when test was not executed.</comment>
   </data>
+  <data name="TestsPageTestAssertionCount" xml:space="preserve">
+    <value>Assert Count: </value>
+    <comment>Label used for the Test page tests assert count.</comment>
+  </data>
+  <data name="TestsPageTestCount" xml:space="preserve">
+    <value>Test Count: </value>
+    <comment>Label used for the Test page test count.</comment>
+  </data>
+  <data name="TestsPageTestDuration" xml:space="preserve">
+    <value>Duration: </value>
+    <comment>Label used for the Test page tests duration.</comment>
+  </data>
+  <data name="TestsPageTestException" xml:space="preserve">
+    <value>Exception Message:</value>
+    <comment>Label used for the Test page exception message.</comment>
+  </data>
+  <data name="TestsPageTestFailCount" xml:space="preserve">
+    <value>Failed: </value>
+    <comment>Label used for the Test page tests failed count.</comment>
+  </data>
+  <data name="TestsPageTestId" xml:space="preserve">
+    <value>Id: </value>
+    <comment>Label used for the Test page test id.</comment>
+  </data>
+  <data name="TestsPageTestIgnoreCount" xml:space="preserve">
+    <value>Ignored: </value>
+    <comment>Label used for the Test page tests ignored count.</comment>
+  </data>
+  <data name="TestsPageTestInconclusiveCount" xml:space="preserve">
+    <value>Inconclusive: </value>
+    <comment>Label used for the Test page tests inconclusive count.</comment>
+  </data>
+  <data name="TestsPageTestOutput" xml:space="preserve">
+    <value>Output Messages:</value>
+    <comment>Label used for the Test page output messages.</comment>
+  </data>
+  <data name="TestsPageTestPassCount" xml:space="preserve">
+    <value>Passed: </value>
+    <comment>Label used for the Test page tests passed count.</comment>
+  </data>
+  <data name="TestsPageTestResult" xml:space="preserve">
+    <value>Result: </value>
+    <comment>Label used for the Test page tests results.</comment>
+  </data>
+  <data name="TestsPageTestStackTrace" xml:space="preserve">
+    <value>StackTrace:</value>
+    <comment>Label used for the Test page stack trace.</comment>
+  </data>
+  <data name="TestsPageTestWarningCount" xml:space="preserve">
+    <value>Warning: </value>
+    <comment>Label used for the Test page warning count.</comment>
+  </data>
   <data name="TestsPageTitle" xml:space="preserve">
     <value>Tests</value>
     <comment>Title used for the Test page.</comment>
+  </data>
+  <data name="TestsPageUnitMillisecond" xml:space="preserve">
+    <value>ms</value>
+    <comment>Unit for milliseconds.</comment>
+  </data>
+  <data name="TestsPageUnitSecond" xml:space="preserve">
+    <value>sec</value>
+    <comment>Unit for seconds.</comment>
   </data>
 </root>

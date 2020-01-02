@@ -11,17 +11,62 @@
              Title="{Binding Title}"
              x:DataType="viewModels:TestsViewModel">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelTextStyle" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+                <Setter Property="FontSize" Value="Medium" />
+            </Style>
+            <Style x:Key="LabelSubTextStyle" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resources:Resource.RunTestsButton}" Clicked="RunTestsClicked" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Name:" FontSize="Medium" />
-        <Label Text="{Binding Test.DisplayName}" d:Text="Test name" FontSize="Small" />
-        <Label Text="Id:" FontSize="Medium" />
-        <Label Text="{Binding Test.Test.Id}" d:Text="Test id" FontSize="Small" />
-        <Label Text="Results:" FontSize="Medium" />
-        <Label Text="{Binding ResultString}" d:Text="Test result" FontSize="Small" />
+    <StackLayout Padding="10">
+        <Label Text="{Binding FullDisplayName}" d:Text="Test name" Style="{StaticResource LabelTextStyle}" />
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{x:Static resources:Resource.TestsPageTestId}" Style="{StaticResource LabelSubTextStyle}" />
+            <Label Text="{Binding Test.Id}" d:Text="1234" Style="{StaticResource LabelSubTextStyle}" />
+
+            <Label Text="{x:Static resources:Resource.TestsPageTestDuration}"
+                   Style="{StaticResource LabelSubTextStyle}" IsVisible="{Binding HasResult}" />
+            <Label Text="{Binding Result.DurationString}" d:Text="1:45" Style="{StaticResource LabelSubTextStyle}"
+                   IsVisible="{Binding HasResult}" />
+
+            <Label Text="{x:Static resources:Resource.TestsPageTestAssertionCount}"
+                   Style="{StaticResource LabelSubTextStyle}" IsVisible="{Binding HasResult}" />
+            <Label Text="{Binding Result.AssertCount}" d:Text="105" Style="{StaticResource LabelSubTextStyle}"
+                   IsVisible="{Binding HasResult}" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{x:Static resources:Resource.TestsPageTestResult}" Style="{StaticResource LabelTextStyle}" />
+            <Label Text="{Binding Result.ResultStateStatus}" d:Text="Test result"
+                   Style="{StaticResource LabelTextStyle}"
+                   TextColor="{Binding Result.TextColor}" />
+        </StackLayout>
+
+        <Label Text="{x:Static resources:Resource.TestsPageTestOutput}" Style="{StaticResource LabelSubTextStyle}"
+               IsVisible="{Binding Result.HasOutput}" />
+        <Label Text="{Binding Result.Output}" d:Text="Test message" Style="{StaticResource LabelSubTextStyle}"
+               IsVisible="{Binding Result.HasOutput}" Padding="10" />
+
+        <Label Text="{x:Static resources:Resource.TestsPageTestException}" Style="{StaticResource LabelSubTextStyle}"
+               IsVisible="{Binding Result.HasMessage}" />
+        <Label Text="{Binding Result.Message}" d:Text="Test message" Style="{StaticResource LabelSubTextStyle}"
+               IsVisible="{Binding Result.HasMessage}" Padding="10" />
+
+        <Label Text="{x:Static resources:Resource.TestsPageTestStackTrace}" Style="{StaticResource LabelSubTextStyle}"
+               IsVisible="{Binding Result.HasStackTrace}" />
+        <Label Text="{Binding Result.StackTrace}" d:Text="Test message" Style="{StaticResource LabelSubTextStyle}"
+               IsVisible="{Binding Result.HasStackTrace}" Padding="10" />
     </StackLayout>
 
 </ContentPage>

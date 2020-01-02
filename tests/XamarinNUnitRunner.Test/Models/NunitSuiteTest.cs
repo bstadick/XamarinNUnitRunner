@@ -308,7 +308,7 @@ namespace XamarinNUnitRunner.Test.Models
             Assert.IsNotNull(suite.Tests);
             if (withChildTests)
             {
-                int testCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                int testCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Assert.AreEqual(testCount, suite.TestCaseCount);
                 Assert.IsTrue(suite.HasChildren);
                 CollectionAssert.IsNotEmpty(suite.Tests);
@@ -514,7 +514,7 @@ namespace XamarinNUnitRunner.Test.Models
             ITestFilter filter = withFilter
                 ? NUnitFilter.Where.Class(typeof(TestFixtureStubOne).FullName).And.Method("Test2").Build().Filter
                 : NUnitFilter.Empty;
-            int expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+            int expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
 
             NUnitSuite suite = new NUnitSuite("suite-name");
             suite.Add(typeof(TestFixtureStubOne).Assembly);

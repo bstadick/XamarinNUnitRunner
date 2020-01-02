@@ -5,13 +5,40 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:XamarinNUnitRunner.ViewModels;assembly=XamarinNUnitRunner"
-             xmlns:models="clr-namespace:XamarinNUnitRunner.Models;assembly=XamarinNUnitRunner"
              xmlns:resources="clr-namespace:XamarinNUnitRunner.Resources;assembly=XamarinNUnitRunner"
              mc:Ignorable="d"
              x:Class="XamarinNUnitRunner.Views.TestsPage"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage"
              x:DataType="viewModels:TestsViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelTextStyle" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+            <Style x:Key="LabelSubTextStyle" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+            <Style x:Key="LabelRedStyle" TargetType="Label" BasedOn="{StaticResource LabelSubTextStyle}">
+                <Setter Property="TextColor" Value="Red" />
+            </Style>
+            <Style x:Key="LabelGreenStyle" TargetType="Label" BasedOn="{StaticResource LabelSubTextStyle}">
+                <Setter Property="TextColor" Value="Green" />
+            </Style>
+            <Style x:Key="LabelOrangeStyle" TargetType="Label" BasedOn="{StaticResource LabelSubTextStyle}">
+                <Setter Property="TextColor" Value="Orange" />
+            </Style>
+            <Style x:Key="LabelBlueStyle" TargetType="Label" BasedOn="{StaticResource LabelSubTextStyle}">
+                <Setter Property="TextColor" Value="Blue" />
+            </Style>
+            <Style x:Key="LabelPurpleStyle" TargetType="Label" BasedOn="{StaticResource LabelSubTextStyle}">
+                <Setter Property="TextColor" Value="Purple" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resources:Resource.RunTestsButton}" Clicked="RunTestsClicked" />
@@ -28,33 +55,61 @@
                   ItemSelected="OnItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell x:DataType="models:NUnitTest">
+                    <ViewCell x:DataType="viewModels:TestsViewModel">
                         <StackLayout Padding="10">
-                            <Label Text="{Binding DisplayName}"
-                                   d:Text="{Binding .}"
-                                   LineBreakMode="NoWrap"
-                                   Style="{DynamicResource ListItemTextStyle}"
-                                   FontSize="16" />
-                            <Label Text="{Binding Test.Id}"
-                                   d:Text="Test id"
-                                   LineBreakMode="NoWrap"
-                                   Style="{DynamicResource ListItemDetailTextStyle}"
-                                   FontSize="13" />
-                            <Label Text="{Binding Test.TestCaseCount}"
-                                   d:Text="Test count"
-                                   LineBreakMode="NoWrap"
-                                   Style="{DynamicResource ListItemDetailTextStyle}"
-                                   FontSize="13" />
-                            <Label Text="{Binding Test.ClassName}"
-                                   d:Text="Test class name"
-                                   LineBreakMode="NoWrap"
-                                   Style="{DynamicResource ListItemDetailTextStyle}"
-                                   FontSize="13" />
-                            <Label Text="{Binding Test.MethodName}"
-                                   d:Text="Test method name"
-                                   LineBreakMode="NoWrap"
-                                   Style="{DynamicResource ListItemDetailTextStyle}"
-                                   FontSize="13" />
+                            <Label Text="{Binding ConditionalDisplayName}" d:Text="{Binding .}"
+                                   Style="{StaticResource LabelTextStyle}"
+                                   TextColor="{Binding Result.TextColor}" />
+
+                            <StackLayout Padding="10" Orientation="Horizontal">
+                                <Label Text="{x:Static resources:Resource.TestsPageTestId}"
+                                       Style="{StaticResource LabelSubTextStyle}" />
+                                <Label Text="{Binding Test.Id}" d:Text="1234"
+                                       Style="{StaticResource LabelSubTextStyle}" />
+
+                                <Label Text="{x:Static resources:Resource.TestsPageTestCount}"
+                                       Style="{StaticResource LabelSubTextStyle}" />
+                                <Label Text="{Binding Test.TestCaseCount}" d:Text="23"
+                                       Style="{StaticResource LabelSubTextStyle}" />
+
+                                <StackLayout Orientation="Horizontal" IsVisible="{Binding HasResult}">
+                                    <Label Text="{x:Static resources:Resource.TestsPageTestDuration}"
+                                           Style="{StaticResource LabelSubTextStyle}" />
+                                    <Label Text="{Binding Result.DurationString}" d:Text="10"
+                                           Style="{StaticResource LabelSubTextStyle}" />
+
+                                    <Label Text="{x:Static resources:Resource.TestsPageTestPassCount}"
+                                           Style="{StaticResource LabelGreenStyle}" />
+                                    <Label Text="{Binding Result.PassCount}" d:Text="10"
+                                           Style="{StaticResource LabelGreenStyle}" />
+
+                                    <Label Text="{x:Static resources:Resource.TestsPageTestFailCount}"
+                                           Style="{StaticResource LabelRedStyle}" />
+                                    <Label Text="{Binding Result.FailCount}" d:Text="8"
+                                           Style="{StaticResource LabelRedStyle}" />
+
+                                    <Label Text="{x:Static resources:Resource.TestsPageTestInconclusiveCount}"
+                                           Style="{StaticResource LabelPurpleStyle}"
+                                           IsVisible="{Binding Result.HasInconclusive}" />
+                                    <Label Text="{Binding Result.InconclusiveCount}" d:Text="2"
+                                           Style="{StaticResource LabelPurpleStyle}"
+                                           IsVisible="{Binding Result.HasInconclusive}" />
+
+                                    <Label Text="{x:Static resources:Resource.TestsPageTestWarningCount}"
+                                           Style="{StaticResource LabelOrangeStyle}"
+                                           IsVisible="{Binding Result.HasWarning}" />
+                                    <Label Text="{Binding Result.WarningCount}" d:Text="2"
+                                           Style="{StaticResource LabelOrangeStyle}"
+                                           IsVisible="{Binding Result.HasWarning}" />
+
+                                    <Label Text="{x:Static resources:Resource.TestsPageTestIgnoreCount}"
+                                           Style="{StaticResource LabelBlueStyle}"
+                                           IsVisible="{Binding Result.HasSkip}" />
+                                    <Label Text="{Binding Result.SkipCount}" d:Text="1"
+                                           Style="{StaticResource LabelBlueStyle}"
+                                           IsVisible="{Binding Result.HasSkip}" />
+                                </StackLayout>
+                            </StackLayout>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

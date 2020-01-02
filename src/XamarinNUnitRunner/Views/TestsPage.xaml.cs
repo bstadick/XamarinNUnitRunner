@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using XamarinNUnitRunner.Models;
 using XamarinNUnitRunner.Services;
 using XamarinNUnitRunner.ViewModels;
 
@@ -23,6 +23,11 @@ namespace XamarinNUnitRunner.Views
         /// </summary>
         private readonly bool v_InitializeComponent;
 
+        /// <summary>
+        ///     Holds a cache of child test pages.
+        /// </summary>
+        private readonly Dictionary<string, Page> v_TestPages = new Dictionary<string, Page>();
+
         #endregion
 
         #region Public Members
@@ -42,13 +47,13 @@ namespace XamarinNUnitRunner.Views
         /// <param name="runner">The NUnit test runner to associate with this master and detail pages.</param>
         /// <param name="test">The NUnit test to associate with this item page.</param>
         /// <param name="initializeComponent">If the <see cref="InitializeComponent" /> should be called.</param>
-        internal TestsPage(INUnitRunner runner, NUnitTest test, bool initializeComponent)
+        internal TestsPage(INUnitRunner runner, TestsViewModel test, bool initializeComponent)
         {
             v_InitializeComponent = initializeComponent;
             v_TestRunner = runner;
 
             // Set view model to default (top-level) if test is null or as a sub-top test
-            ViewModel = test == null ? new TestsViewModel(runner) : new TestsViewModel(runner, test);
+            ViewModel = test ?? new TestsViewModel(runner);
 
             if (initializeComponent)
             {
@@ -63,7 +68,7 @@ namespace XamarinNUnitRunner.Views
         /// </summary>
         /// <param name="runner">The NUnit test runner to associate with this master and detail pages.</param>
         /// <param name="test">The NUnit test to associate with this item page.</param>
-        public TestsPage(INUnitRunner runner, NUnitTest test = null) : this(runner, test, true)
+        public TestsPage(INUnitRunner runner, TestsViewModel test = null) : this(runner, test, true)
         {
         }
 
@@ -78,10 +83,14 @@ namespace XamarinNUnitRunner.Views
         {
             base.OnAppearing();
 
-            // Load items if none are loaded
+            // Load items if none are loaded, otherwise just reload results
             if (ViewModel.Tests.Count == 0)
             {
                 ViewModel.LoadTestsCommand.Execute(null);
+            }
+            else
+            {
+                ViewModel.ReloadResultsCommand.Execute(null);
             }
         }
 
@@ -93,26 +102,44 @@ namespace XamarinNUnitRunner.Views
         protected void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             // Do nothing if item is null or not of expected type
-            if (!(args?.SelectedItem is NUnitTest test) || test.Test == null)
+            if (!(args?.SelectedItem is TestsViewModel test) || test.Test == null || string.IsNullOrEmpty(test.Test.Id))
             {
+                DeselectListViewItem(sender);
                 return;
             }
 
-            // Navigate to appropriate page depending on if test has child tests
-            if (test.Test.HasChildren)
+            // Do not navigate if no children and is a suite
+            if (!test.Test.HasChildren && test.Test.IsSuite)
             {
-                NavigatePushAsync(new TestsPage(v_TestRunner, test, v_InitializeComponent));
+                DeselectListViewItem(sender);
+                return;
+            }
+
+            // Navigate to appropriate page depending on if it is already been cached and if the test has child tests
+            Page page;
+            string id = test.Test.Id;
+            if (v_TestPages.ContainsKey(id))
+            {
+                page = v_TestPages[id];
             }
             else
             {
-                NavigatePushAsync(new TestDetailPage(v_TestRunner, test, v_InitializeComponent));
+                if (test.Test.HasChildren)
+                {
+                    page = new TestsPage(v_TestRunner, test, v_InitializeComponent);
+                }
+                else
+                {
+                    page = new TestDetailPage(test, v_InitializeComponent);
+                }
+
+                v_TestPages.Add(test.Test.Id, page);
             }
 
+            NavigatePushAsync(page);
+
             // Manually deselect item.
-            if (sender is ListView view)
-            {
-                view.SelectedItem = null;
-            }
+            DeselectListViewItem(sender);
         }
 
         /// <summary>
@@ -134,6 +161,22 @@ namespace XamarinNUnitRunner.Views
         protected virtual async void NavigatePushAsync(Page page)
         {
             await Navigation.PushAsync(page).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        ///     Deselects currently selected item if sender is a <see cref="ListView" />.
+        /// </summary>
+        /// <param name="sender">The sender to deselect.</param>
+        private static void DeselectListViewItem(object sender)
+        {
+            if (sender is ListView view)
+            {
+                view.SelectedItem = null;
+            }
         }
 
         #endregion

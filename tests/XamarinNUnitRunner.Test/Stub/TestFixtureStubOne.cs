@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using NUnit.Framework;
 
@@ -5,24 +6,18 @@ namespace XamarinNUnitRunner.Test.Stub
 {
     [TestFixture]
     [Category("TestFixtureCategory")]
-    public class TestFixtureStubOne
+    public class TestFixtureStubOne : ITestFixtureStub
     {
-        #region Public Members
+        #region Implementation of ITestFixtureStub
 
-        /// <summary>
-        /// The number of test cases.
-        /// </summary>
-        public const int TestCount = 17;
+        /// <inheritdoc />
+        public int TestCount { get; } = 18;
 
-        /// <summary>
-        /// The number of test case results including parent results.
-        /// </summary>
-        public const int ResultCount = 19;
+        /// <inheritdoc />
+        public int ResultCount { get; } = 20;
 
-        /// <summary>
-        /// The depth of the test result. One level for the DLL and each namespace including the class name.
-        /// </summary>
-        public const int ResultsDepth = 5;
+        /// <inheritdoc />
+        public int ResultsDepth => TestFixtureStubHelper.CountResultsDepth(typeof(TestFixtureStubOne));
 
         #endregion
 
@@ -45,7 +40,8 @@ namespace XamarinNUnitRunner.Test.Stub
         [Test]
         public void Test1()
         {
-            // Basic test
+            // Basic test with output
+            Console.WriteLine("Test message to display.");
             Assert.IsTrue(true);
         }
 
@@ -103,6 +99,13 @@ namespace XamarinNUnitRunner.Test.Stub
             // Long duration test
             Thread.Sleep(500);
             Assert.IsTrue(true);
+        }
+
+        [Test]
+        public void Test9()
+        {
+            // Test that throws exception
+            throw new InvalidOperationException("Test exception.");
         }
 
         #endregion

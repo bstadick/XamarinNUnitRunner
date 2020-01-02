@@ -70,7 +70,7 @@ namespace XamarinNUnitRunner.ViewModels
 
             // Call the callback and property changed event when value changes
             onChanged?.Invoke();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            InvokePropertyChanged(propertyName);
 
             return true;
         }
@@ -81,6 +81,15 @@ namespace XamarinNUnitRunner.ViewModels
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        ///     Invokes the <see cref="PropertyChanged" /> event.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that has changed</param>
+        protected void InvokePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
     }

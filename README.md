@@ -41,7 +41,7 @@ Example test runner projects can be found in the examples folder.
 
 ## Future Enhancements
 
-- User interface improvements and beautification
+- User interface beatification and performance improvements
 - Running tests by category
 - Exporting results to a file
 - Searching and filtering tests

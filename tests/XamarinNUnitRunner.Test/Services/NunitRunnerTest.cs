@@ -315,7 +315,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expected = 0;
             if (withChildTests)
             {
-                expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -350,7 +350,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expected = 0;
             if (withChildTests)
             {
-                expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -378,7 +378,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expected = 0;
             if (withChildTests)
             {
-                expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -416,7 +416,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expected = 0;
             if (withChildTests)
             {
-                expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -446,7 +446,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expected = 0;
             if (withChildTests)
             {
-                expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -491,7 +491,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expected = 0;
             if (withChildTests)
             {
-                expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -526,7 +526,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expected = 0;
             if (withChildTests)
             {
-                expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -574,7 +574,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expected = 0;
             if (withChildTests)
             {
-                expected = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expected = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -621,9 +621,9 @@ namespace XamarinNUnitRunner.Test.Services
             int expectedResultCount = 0;
             if (withChildTests)
             {
-                expectedCaseCount = TestFixtureStubOne.ResultsDepth +
-                                    (withFilter ? 1 : TestFixtureStubOne.ResultCount);
-                expectedResultCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expectedCaseCount = TestFixtureStubHelper.GeTestFixtureStub().ResultsDepth +
+                                    (withFilter ? 2 : TestFixtureStubHelper.GeTestFixtureStub().ResultCount);
+                expectedResultCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -678,9 +678,9 @@ namespace XamarinNUnitRunner.Test.Services
             int expectedResultCount = 0;
             if (withChildTests)
             {
-                expectedCaseCount = TestFixtureStubOne.ResultsDepth +
-                                    (withFilter ? 1 : TestFixtureStubOne.ResultCount);
-                expectedResultCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expectedCaseCount = TestFixtureStubHelper.GeTestFixtureStub().ResultsDepth +
+                                    (withFilter ? 2 : TestFixtureStubHelper.GeTestFixtureStub().ResultCount);
+                expectedResultCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -737,9 +737,9 @@ namespace XamarinNUnitRunner.Test.Services
             int expectedResultCount = 0;
             if (withChildTests)
             {
-                expectedCaseCount = TestFixtureStubOne.ResultsDepth +
-                                    (withFilter ? 1 : TestFixtureStubOne.ResultCount);
-                expectedResultCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expectedCaseCount = TestFixtureStubHelper.GeTestFixtureStub().ResultsDepth +
+                                    (withFilter ? 2 : TestFixtureStubHelper.GeTestFixtureStub().ResultCount);
+                expectedResultCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -792,8 +792,9 @@ namespace XamarinNUnitRunner.Test.Services
             NUnitRunnerForTest runner = new NUnitRunnerForTest(suite);
             Assembly assembly = typeof(TestFixtureStubOne).Assembly;
 
-            const int expectedCaseCount = TestFixtureStubOne.ResultsDepth + TestFixtureStubOne.ResultCount;
-            const int expectedResultCount = TestFixtureStubOne.TestCount;
+            int expectedCaseCount = TestFixtureStubHelper.GeTestFixtureStub().ResultsDepth +
+                                    TestFixtureStubHelper.GeTestFixtureStub().ResultCount;
+            int expectedResultCount = TestFixtureStubHelper.GeTestFixtureStub().TestCount;
             Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
             testTask.Wait();
 
@@ -847,9 +848,9 @@ namespace XamarinNUnitRunner.Test.Services
             int expectedResultCount = 0;
             if (withChildTests)
             {
-                expectedCaseCount = TestFixtureStubOne.ResultsDepth +
-                                    (withFilter ? 1 : TestFixtureStubOne.ResultCount);
-                expectedResultCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expectedCaseCount = TestFixtureStubHelper.GeTestFixtureStub().ResultsDepth +
+                                    (withFilter ? 2 : TestFixtureStubHelper.GeTestFixtureStub().ResultCount);
+                expectedResultCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -904,7 +905,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expectedCount = 0;
             if (withChildTests)
             {
-                expectedCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expectedCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -957,7 +958,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expectedCount = 0;
             if (withChildTests)
             {
-                expectedCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expectedCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -1003,7 +1004,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expectedCount = 0;
             if (withChildTests)
             {
-                expectedCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expectedCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }
@@ -1059,7 +1060,7 @@ namespace XamarinNUnitRunner.Test.Services
             int expectedCount = 0;
             if (withChildTests)
             {
-                expectedCount = withFilter ? 1 : TestFixtureStubOne.TestCount;
+                expectedCount = withFilter ? 1 : TestFixtureStubHelper.GeTestFixtureStub().TestCount;
                 Task<ITest> testTask = runner.AddTestAssemblyAsync(assembly);
                 testTask.Wait();
             }

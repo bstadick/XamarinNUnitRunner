@@ -4,6 +4,7 @@ using NUnit.Framework;
 using XamarinNUnitRunner.Models;
 using XamarinNUnitRunner.Services;
 using XamarinNUnitRunner.Test.Stub;
+using XamarinNUnitRunner.ViewModels;
 using XamarinNUnitRunner.Views;
 
 namespace XamarinNUnitRunner.Test.Views
@@ -19,13 +20,13 @@ namespace XamarinNUnitRunner.Test.Views
         public void TestConstructorWithNUnitRunner([Values] bool isRunnerNull, [Values] bool isTestNull)
         {
             NUnitRunner runner = isRunnerNull ? null : new NUnitRunner("runner-name");
-            NUnitTest test = isTestNull ? null : new NUnitTest(new NUnitSuite("suite-name"));
+            TestsViewModel test = isTestNull ? null : new TestsViewModel(runner, new NUnitSuite("suite-name"));
 
-            TestDetailPage page = new TestDetailPage(runner, test, false);
+            TestDetailPage page = new TestDetailPage(test, false);
 
-            Assert.IsNotNull(page.ViewModel);
-            Assert.AreSame(runner, page.ViewModel.TestRunner);
-            Assert.AreSame(test, page.ViewModel.Test);
+            Assert.AreSame(test, page.ViewModel);
+            Assert.AreSame(test?.TestRunner, page.ViewModel?.TestRunner);
+            Assert.AreSame(test?.Test, page.ViewModel?.Test);
         }
 
         #endregion
@@ -37,11 +38,12 @@ namespace XamarinNUnitRunner.Test.Views
         {
             NUnitRunner runner = new NUnitRunner("runner-name");
             runner.AddTestAssembly(typeof(TestFixtureStubOne).Assembly);
-            NUnitTest test = new NUnitTest(new NUnitSuite("suite-name"));
+            TestsViewModel test = new TestsViewModel(runner, new NUnitSuite("suite-name"));
 
-            TestDetailPageForTest page = new TestDetailPageForTest(runner, test);
+            TestDetailPageForTest page = new TestDetailPageForTest(test);
 
-            Assert.IsNull(page.ViewModel.Result);
+            Assert.IsNotNull(page.ViewModel.Result);
+            Assert.IsNull(page.ViewModel.Result.Result);
 
             page.InvokeRunTestsClicked(this, EventArgs.Empty);
 
@@ -62,7 +64,7 @@ namespace XamarinNUnitRunner.Test.Views
             #region Constructor
 
             /// <inheritdoc />
-            public TestDetailPageForTest(INUnitRunner runner, NUnitTest test) : base(runner, test, false)
+            public TestDetailPageForTest(TestsViewModel test) : base(test, false)
             {
             }
 

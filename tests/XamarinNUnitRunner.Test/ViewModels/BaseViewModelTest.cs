@@ -113,6 +113,7 @@ namespace XamarinNUnitRunner.Test.ViewModels
             Assert.AreEqual(string.Empty, model.Title);
             Assert.AreEqual(0, invocationCount);
 
+            // If title is same as initial, set it to a different value to invoke change
             if (model.Title == title)
             {
                 model.Title = title + "a";
@@ -146,6 +147,7 @@ namespace XamarinNUnitRunner.Test.ViewModels
             Assert.AreEqual(string.Empty, model.Title);
             Assert.AreEqual(0, invocationCount);
 
+            // If title is not same as initial, set it to initial value
             if (model.Title != title)
             {
                 model.Title = title;

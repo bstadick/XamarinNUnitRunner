@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using XamarinNUnitRunner.Models;
-using XamarinNUnitRunner.Services;
 using XamarinNUnitRunner.ViewModels;
 
 namespace XamarinNUnitRunner.Views
@@ -25,12 +23,11 @@ namespace XamarinNUnitRunner.Views
         /// <summary>
         ///     Initializes a new <see cref="TestDetailPage" />.
         /// </summary>
-        /// <param name="runner">The NUnit test runner to associate with this master and detail pages.</param>
         /// <param name="test">The NUnit test to associate with this detail pages.</param>
         /// <param name="initializeComponent">If the <see cref="InitializeComponent" /> should be called.</param>
-        internal TestDetailPage(INUnitRunner runner, NUnitTest test, bool initializeComponent)
+        internal TestDetailPage(TestsViewModel test, bool initializeComponent)
         {
-            ViewModel = new TestsViewModel(runner, test);
+            ViewModel = test;
 
             if (initializeComponent)
             {
@@ -43,9 +40,8 @@ namespace XamarinNUnitRunner.Views
         /// <summary>
         ///     Initializes a new <see cref="TestDetailPage" />.
         /// </summary>
-        /// <param name="runner">The NUnit test runner to associate with this master and detail pages.</param>
         /// <param name="test">The NUnit test to associate with this detail pages.</param>
-        public TestDetailPage(INUnitRunner runner, NUnitTest test) : this(runner, test, true)
+        public TestDetailPage(TestsViewModel test) : this(test, true)
         {
         }
 

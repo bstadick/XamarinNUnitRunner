@@ -268,11 +268,146 @@ namespace XamarinNUnitRunner.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assert Count: .
+        /// </summary>
+        internal static string TestsPageTestAssertionCount {
+            get {
+                return ResourceManager.GetString("TestsPageTestAssertionCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Count: .
+        /// </summary>
+        internal static string TestsPageTestCount {
+            get {
+                return ResourceManager.GetString("TestsPageTestCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration: .
+        /// </summary>
+        internal static string TestsPageTestDuration {
+            get {
+                return ResourceManager.GetString("TestsPageTestDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exception Message:.
+        /// </summary>
+        internal static string TestsPageTestException {
+            get {
+                return ResourceManager.GetString("TestsPageTestException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed: .
+        /// </summary>
+        internal static string TestsPageTestFailCount {
+            get {
+                return ResourceManager.GetString("TestsPageTestFailCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id: .
+        /// </summary>
+        internal static string TestsPageTestId {
+            get {
+                return ResourceManager.GetString("TestsPageTestId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignored: .
+        /// </summary>
+        internal static string TestsPageTestIgnoreCount {
+            get {
+                return ResourceManager.GetString("TestsPageTestIgnoreCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inconclusive: .
+        /// </summary>
+        internal static string TestsPageTestInconclusiveCount {
+            get {
+                return ResourceManager.GetString("TestsPageTestInconclusiveCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output Messages:.
+        /// </summary>
+        internal static string TestsPageTestOutput {
+            get {
+                return ResourceManager.GetString("TestsPageTestOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passed: .
+        /// </summary>
+        internal static string TestsPageTestPassCount {
+            get {
+                return ResourceManager.GetString("TestsPageTestPassCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result: .
+        /// </summary>
+        internal static string TestsPageTestResult {
+            get {
+                return ResourceManager.GetString("TestsPageTestResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StackTrace:.
+        /// </summary>
+        internal static string TestsPageTestStackTrace {
+            get {
+                return ResourceManager.GetString("TestsPageTestStackTrace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning: .
+        /// </summary>
+        internal static string TestsPageTestWarningCount {
+            get {
+                return ResourceManager.GetString("TestsPageTestWarningCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tests.
         /// </summary>
         internal static string TestsPageTitle {
             get {
                 return ResourceManager.GetString("TestsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ms.
+        /// </summary>
+        internal static string TestsPageUnitMillisecond {
+            get {
+                return ResourceManager.GetString("TestsPageUnitMillisecond", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sec.
+        /// </summary>
+        internal static string TestsPageUnitSecond {
+            get {
+                return ResourceManager.GetString("TestsPageUnitSecond", resourceCulture);
             }
         }
     }
