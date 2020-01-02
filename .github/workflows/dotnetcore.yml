@@ -23,4 +23,4 @@ jobs:
     - name: Pack with dotnet
       run: dotnet pack --configuration Release
     - name: Deploy to GPR with dotnet
-      run: dotnet nuget push "/src/XamarinNUnitRunner/bin/Release/*.nupkg" --source "https://nuget.pkg.github.com/bstadick/index.json" --api-key ${{secrets.GITHUB_TOKEN}}
+      run: dotnet nuget push "src/XamarinNUnitRunner/bin/Release/*.nupkg" --source "https://nuget.pkg.github.com/bstadick/index.json" --api-key ${{secrets.GITHUB_TOKEN}}
