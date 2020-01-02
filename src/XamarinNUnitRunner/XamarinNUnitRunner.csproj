@@ -15,7 +15,6 @@
         <Description>Xamarin.Forms package for exploring and running NUnit tests.</Description>
         <NeutralLanguage>en-US</NeutralLanguage>
         <SignAssembly>false</SignAssembly>
-        <UserSecretsId>8dff7bb6-a63f-4d4f-8b06-742ec0239eed</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -24,10 +23,6 @@
         <EmbeddedResource Include="Resources\tab_feed.png" />
         <EmbeddedResource Include="Resources\tab_feed@2x.png" />
         <EmbeddedResource Include="Resources\tab_feed@3x.png" />
-        <EmbeddedResource Update="Resources\Resource.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
         <None Include="..\..\LICENSE">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
@@ -54,5 +49,9 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resource.resx</DependentUpon>
         </Compile>
+        <EmbeddedResource Update="Resources\Resource.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 </Project>
