@@ -13,7 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.101
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        source-url: https://nuget.pkg.github.com/bstadick/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: Test with dotnet
@@ -21,4 +23,4 @@ jobs:
     - name: Pack with dotnet
       run: dotnet pack --configuration Release
     - name: Deploy with dotnet
-      run: dotnet nuget push "bin/Release/XamarinNUnitRunner.0.1.0.nupkg" --source "github"
+      run: dotnet nuget push "bin/Release/*.nupkg"
