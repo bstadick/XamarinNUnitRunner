@@ -16,6 +16,8 @@ jobs:
         source-url: https://nuget.pkg.github.com/bstadick/index.json
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GPR_TOKEN}}
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: Test with dotnet
