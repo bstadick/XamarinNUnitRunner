@@ -16,8 +16,6 @@ jobs:
         source-url: https://nuget.pkg.github.com/bstadick/index.json
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - name: Clean with dotnet
-      run: dotnet clean --configuration Release
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: Test with dotnet
@@ -25,4 +23,4 @@ jobs:
     - name: Pack with dotnet
       run: dotnet pack --configuration Release
     - name: Deploy to GPR with dotnet
-      run: dotnet nuget push "bin/Release/*.nupkg" --source "https://nuget.pkg.github.com/bstadick/index.json"
+      run: dotnet nuget push "/src/XamarinNUnitRunner/bin/Release/*.nupkg" --source "https://nuget.pkg.github.com/bstadick/index.json" --api-key ${{secrets.GITHUB_TOKEN}}
