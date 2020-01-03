@@ -1,6 +1,6 @@
-name: .NET Core
+name: .NET Core Release
 
-on: [push]
+on: [release]
 
 jobs:
   build:

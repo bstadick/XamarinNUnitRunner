@@ -10,7 +10,7 @@
         <PackageProjectUrl>https://github.com/bstadick/XamarinNUnitRunner</PackageProjectUrl>
         <RepositoryUrl>https://github.com/bstadick/XamarinNUnitRunner</RepositoryUrl>
         <PackageReleaseNotes>Official release of XamarinNUnitRunner. This release is bare-bones and has some performance issues loading test views. See future enhancements for upcoming changes.</PackageReleaseNotes>
-        <Copyright>Copyright (c) 2019 Bryan Stadick</Copyright>
+        <Copyright>Copyright (c) 2020 Bryan Stadick</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>Xamarin.Forms package for exploring and running NUnit tests.</Description>
         <NeutralLanguage>en-US</NeutralLanguage>
