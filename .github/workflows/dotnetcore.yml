@@ -27,4 +27,4 @@ jobs:
     - name: Add GPR Source
       run: nuget sources add -name "github" -Source https://nuget.pkg.github.com/bstadick/index.json -Username bstadick -Password ${{ secrets.GITHUB_TOKEN }}
     - name: Deploy to GPR with dotnet
-      run: dotnet nuget push "src/XamarinNUnitRunner/bin/Release/*.nupkg" -s "github" --skip-duplicate
+      run: dotnet nuget push ".\src\XamarinNUnitRunner\bin\Release\*.nupkg" -s "github" --skip-duplicate
