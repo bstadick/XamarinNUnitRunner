@@ -268,6 +268,15 @@ namespace XamarinNUnitRunner.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assertion Status: .
+        /// </summary>
+        internal static string TestsPageAssertionStatus {
+            get {
+                return ResourceManager.GetString("TestsPageAssertionStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assert Count: .
         /// </summary>
         internal static string TestsPageTestAssertionCount {

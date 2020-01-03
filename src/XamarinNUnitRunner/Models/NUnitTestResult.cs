@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework.Interfaces;
 using Xamarin.Forms;
 using XamarinNUnitRunner.Resources;
@@ -101,10 +102,24 @@ namespace XamarinNUnitRunner.Models
         public bool HasOutput => !string.IsNullOrEmpty(Result?.Output);
 
         /// <inheritdoc />
-        public bool HasMessage => !string.IsNullOrEmpty(Result?.Message);
+        public bool HasMessage => !string.IsNullOrEmpty(Result?.Message) && !HasFailedAssertions;
 
         /// <inheritdoc />
-        public bool HasStackTrace => !string.IsNullOrEmpty(Result?.StackTrace);
+        public bool HasStackTrace => !string.IsNullOrEmpty(Result?.StackTrace) && !HasFailedAssertions;
+
+        /// <inheritdoc />
+        public bool HasFailedAssertions => AssertionResults.Any(x => x != null && x.Status != AssertionStatus.Passed);
+
+        /// <inheritdoc />
+        public string FailedAssertionsString => string.Join(Environment.NewLine,
+            AssertionResults.Where(x => x != null && x.Status != AssertionStatus.Passed).Select(x =>
+                $"{Resource.TestsPageAssertionStatus}{x.Status}" + (string.IsNullOrEmpty(x.Message)
+                    ? string.Empty
+                    : $"{Environment.NewLine}{x.Message}") +
+                (string.IsNullOrEmpty(x.StackTrace)
+                    ? string.Empty
+                    : $"{Environment.NewLine}{Resource.TestsPageTestStackTrace}{Environment.NewLine}{x.StackTrace}")
+            ));
 
         #endregion
 

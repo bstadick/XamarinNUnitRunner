@@ -207,7 +207,7 @@ namespace XamarinNUnitRunner.Test.Models
         #region Tests for HasWarning Property
 
         [Test]
-        public void TestHasWarningPropertyWithNotInconclusiveReturnsFalse([Values] bool hasResult)
+        public void TestHasWarningPropertyWithNoWarningReturnsFalse([Values] bool hasResult)
         {
             TestResultForTest resultInstance = new TestResultForTest();
             resultInstance.InconclusiveCount = 0;
@@ -220,7 +220,7 @@ namespace XamarinNUnitRunner.Test.Models
         }
 
         [Test]
-        public void TestHasWarningPropertyWithInconclusiveReturnsTrue()
+        public void TestHasWarningPropertyWithWarningReturnsTrue()
         {
             const int count = 5;
             TestResultForTest result = new TestResultForTest();
@@ -237,7 +237,7 @@ namespace XamarinNUnitRunner.Test.Models
         #region Tests for HasSkip Property
 
         [Test]
-        public void TestHasSkipPropertyWithNotInconclusiveReturnsFalse([Values] bool hasResult)
+        public void TestHasSkipPropertyWithNoSkipReturnsFalse([Values] bool hasResult)
         {
             TestResultForTest resultInstance = new TestResultForTest();
             resultInstance.SkipCount = 0;
@@ -250,7 +250,7 @@ namespace XamarinNUnitRunner.Test.Models
         }
 
         [Test]
-        public void TestHasSkipPropertyWithInconclusiveReturnsTrue()
+        public void TestHasSkipPropertyWithSkipReturnsTrue()
         {
             const int count = 5;
             TestResultForTest result = new TestResultForTest();
@@ -267,7 +267,7 @@ namespace XamarinNUnitRunner.Test.Models
         #region Tests for HasOutput Property
 
         [Test]
-        public void TestHasOutputPropertyWithNotInconclusiveReturnsFalse([Values] bool hasResult, [Values] bool isNull)
+        public void TestHasOutputPropertyWithNoOutputReturnsFalse([Values] bool hasResult, [Values] bool isNull)
         {
             TestResultForTest resultInstance = new TestResultForTest();
             resultInstance.Output = isNull ? null : string.Empty;
@@ -280,7 +280,7 @@ namespace XamarinNUnitRunner.Test.Models
         }
 
         [Test]
-        public void TestHasOutputPropertyWithInconclusiveReturnsTrue()
+        public void TestHasOutputPropertyWithOutputReturnsTrue()
         {
             const string msg = "This is a test message.";
             TestResultForTest result = new TestResultForTest();
@@ -297,7 +297,7 @@ namespace XamarinNUnitRunner.Test.Models
         #region Tests for HasMessage Property
 
         [Test]
-        public void TestHasMessagePropertyWithNotInconclusiveReturnsFalse([Values] bool hasResult, [Values] bool isNull)
+        public void TestHasMessagePropertyWithNoMessageReturnsFalse([Values] bool hasResult, [Values] bool isNull)
         {
             TestResultForTest resultInstance = new TestResultForTest();
             resultInstance.Message = isNull ? null : string.Empty;
@@ -310,7 +310,26 @@ namespace XamarinNUnitRunner.Test.Models
         }
 
         [Test]
-        public void TestHasMessagePropertyWithInconclusiveReturnsTrue()
+        public void TestHasMessagePropertyWithMessageAndFailedAssertionsReturnsFalse([Values] bool hasResult)
+        {
+            const string msg = "This is a test message.";
+            IList<AssertionResult> assertions = new List<AssertionResult>
+            {
+                new AssertionResult(AssertionStatus.Failed, "message", "trace")
+            };
+
+            TestResultForTest result = new TestResultForTest();
+            result.Message = msg;
+            result.AssertionResults = assertions;
+            INUnitTestResult test = new NUnitTestResult(result);
+
+            Assert.AreEqual(msg, test.Message);
+            Assert.IsTrue(test.HasFailedAssertions);
+            Assert.IsFalse(test.HasMessage);
+        }
+
+        [Test]
+        public void TestHasMessagePropertyWithMessageReturnsTrue()
         {
             const string msg = "This is a test message.";
             TestResultForTest result = new TestResultForTest();
@@ -327,7 +346,7 @@ namespace XamarinNUnitRunner.Test.Models
         #region Tests for HasStackTrace Property
 
         [Test]
-        public void TestHasStackTracePropertyWithNotInconclusiveReturnsFalse([Values] bool hasResult,
+        public void TestHasStackTracePropertyWithNoStackTraceReturnsFalse([Values] bool hasResult,
             [Values] bool isNull)
         {
             TestResultForTest resultInstance = new TestResultForTest();
@@ -341,7 +360,26 @@ namespace XamarinNUnitRunner.Test.Models
         }
 
         [Test]
-        public void TestHasStackTracePropertyWithInconclusiveReturnsTrue()
+        public void TestHasStackTracePropertyWithStackTraceAndFailedAssertionsReturnsFalse()
+        {
+            const string msg = "This is a test message.";
+            IList<AssertionResult> assertions = new List<AssertionResult>
+            {
+                new AssertionResult(AssertionStatus.Failed, "message", "trace")
+            };
+
+            TestResultForTest result = new TestResultForTest();
+            result.StackTrace = msg;
+            result.AssertionResults = assertions;
+            INUnitTestResult test = new NUnitTestResult(result);
+
+            Assert.AreEqual(msg, test.StackTrace);
+            Assert.IsTrue(test.HasFailedAssertions);
+            Assert.IsFalse(test.HasStackTrace);
+        }
+
+        [Test]
+        public void TestHasStackTracePropertyWithStackTraceReturnsTrue()
         {
             const string msg = "This is a test message.";
             TestResultForTest result = new TestResultForTest();
@@ -351,6 +389,83 @@ namespace XamarinNUnitRunner.Test.Models
 
             Assert.AreEqual(msg, test.StackTrace);
             Assert.IsTrue(test.HasStackTrace);
+        }
+
+        #endregion
+
+        #region Tests for HasFailedAssertions Property
+
+        [Test]
+        public void TestHasFailedAssertionsPropertyReturnsIfTestsHasFailedAssertion([Values] bool hasResult,
+            [Values] bool hasAssertions, [Values] AssertionStatus status)
+        {
+            bool expected = hasResult && hasAssertions && status != AssertionStatus.Passed;
+            IList<AssertionResult> assertions = new List<AssertionResult>
+            {
+                new AssertionResult(AssertionStatus.Passed, "message", "trace"),
+                null,
+                new AssertionResult(status, "message", "trace"),
+                new AssertionResult(AssertionStatus.Passed, "message", "trace")
+            };
+
+            TestResultForTest resultInstance = new TestResultForTest();
+            resultInstance.AssertionResults = hasAssertions ? assertions : null;
+            ITestResult result = hasResult ? resultInstance : null;
+
+            INUnitTestResult test = new NUnitTestResult(result);
+
+            Assert.AreEqual(expected, test.HasFailedAssertions);
+            if (hasResult && hasAssertions)
+            {
+                CollectionAssert.AreEqual(assertions, test.AssertionResults);
+            }
+            else
+            {
+                CollectionAssert.IsEmpty(test.AssertionResults);
+            }
+        }
+
+        #endregion
+
+        #region Tests for FailedAssertionsString Property
+
+        [Test]
+        public void TestFailedAssertionsStringPropertyReturnsIfFormattedFailedAssertionString([Values] bool hasResult,
+            [Values] bool hasAssertions, [Values] bool missingIsNull, [Values] AssertionStatus status)
+        {
+            string nl = Environment.NewLine;
+            string missing = missingIsNull ? null : string.Empty;
+            bool expected = hasResult && hasAssertions && status != AssertionStatus.Passed;
+            string expectedMsg = expected
+                ? $"Assertion Status: {status}{nl}message 2{nl}StackTrace:{nl}trace 2{nl}" +
+                  $"Assertion Status: {status}{nl}StackTrace:{nl}trace 3{nl}" +
+                  $"Assertion Status: {status}{nl}message 4"
+                : string.Empty;
+            IList<AssertionResult> assertions = new List<AssertionResult>
+            {
+                new AssertionResult(AssertionStatus.Passed, "message 1", "trace 1"),
+                null,
+                new AssertionResult(status, "message 2", "trace 2"),
+                new AssertionResult(status, missing, "trace 3"),
+                new AssertionResult(status, "message 4", missing),
+            };
+
+            TestResultForTest resultInstance = new TestResultForTest();
+            resultInstance.AssertionResults = hasAssertions ? assertions : null;
+            ITestResult result = hasResult ? resultInstance : null;
+
+            INUnitTestResult test = new NUnitTestResult(result);
+
+            Assert.AreEqual(expected, test.HasFailedAssertions);
+            Assert.AreEqual(expectedMsg, test.FailedAssertionsString);
+            if (hasResult && hasAssertions)
+            {
+                CollectionAssert.AreEqual(assertions, test.AssertionResults);
+            }
+            else
+            {
+                CollectionAssert.IsEmpty(test.AssertionResults);
+            }
         }
 
         #endregion

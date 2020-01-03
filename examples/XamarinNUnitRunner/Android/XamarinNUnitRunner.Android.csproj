@@ -86,13 +86,13 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\XamarinNUnitRunner\XamarinNUnitRunner.csproj">
+      <Project>{65cdc124-debb-4b29-97a3-7ed738e4de87}</Project>
+      <Name>XamarinNUnitRunner</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\tests\XamarinNUnitRunner.Test\Stub\XamarinNUnitRunner.Test.Stub.csproj">
       <Project>{4b4a1d74-1aeb-42b7-ac8e-c2d4fa8c3554}</Project>
       <Name>XamarinNUnitRunner.Test.Stub</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XamarinNUnitRunner\XamarinNUnitRunner.csproj">
-      <Project>{33D1780F-682F-40F4-9402-79C95A11F8DD}</Project>
-      <Name>XamarinNUnitRunner</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -60,5 +60,15 @@ namespace XamarinNUnitRunner.Models
         ///     Gets if there are stack traces of child tests.
         /// </summary>
         bool HasStackTrace { get; }
+
+        /// <summary>
+        ///     Gets if an assertion has failed.
+        /// </summary>
+        bool HasFailedAssertions { get; }
+
+        /// <summary>
+        ///     Gets a string of failed assertions.
+        /// </summary>
+        string FailedAssertionsString { get; }
     }
 }

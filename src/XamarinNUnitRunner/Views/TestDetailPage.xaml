@@ -53,6 +53,9 @@
                    TextColor="{Binding Result.TextColor}" />
         </StackLayout>
 
+        <Label Text="{Binding Result.FailedAssertionsString}" d:Text="Test message" Style="{StaticResource LabelSubTextStyle}"
+               IsVisible="{Binding Result.HasFailedAssertions}" Padding="10" />
+
         <Label Text="{x:Static resources:Resource.TestsPageTestOutput}" Style="{StaticResource LabelSubTextStyle}"
                IsVisible="{Binding Result.HasOutput}" />
         <Label Text="{Binding Result.Output}" d:Text="Test message" Style="{StaticResource LabelSubTextStyle}"

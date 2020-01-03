@@ -209,6 +209,10 @@
     <value>Test not executed.</value>
     <comment>Displayed when test was not executed.</comment>
   </data>
+  <data name="TestsPageAssertionStatus" xml:space="preserve">
+    <value>Assertion Status: </value>
+    <comment>Lable uses for the Test page assertion status.</comment>
+  </data>
   <data name="TestsPageTestAssertionCount" xml:space="preserve">
     <value>Assert Count: </value>
     <comment>Label used for the Test page tests assert count.</comment>
