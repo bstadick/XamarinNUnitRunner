@@ -45,6 +45,8 @@ Example test runner projects can be found in the examples folder.
 - Running tests by category
 - Exporting results to a file
 - Searching and filtering tests
+- Migrate to target .NET 5.0/6.0
+- Deploy package to Nuget
 - Configuring test settings
 - Live updates/console as tests are progressing
 - Remote test management
