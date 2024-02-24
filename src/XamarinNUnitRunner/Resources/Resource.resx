@@ -205,13 +205,29 @@
     <value>XamarinNUnitRunner.Resources.tab_feed.png</value>
     <comment>Resource path for the tab feed image.</comment>
   </data>
+  <data name="TestListenerFinished" xml:space="preserve">
+    <value>Finished</value>
+    <comment>Test listener finished message.</comment>
+  </data>
+  <data name="TestListenerMessage" xml:space="preserve">
+    <value>Message</value>
+    <comment>Test listener message.</comment>
+  </data>
+  <data name="TestListenerOutput" xml:space="preserve">
+    <value>Output</value>
+    <comment>Test listener output message.</comment>
+  </data>
+  <data name="TestListenerStarted" xml:space="preserve">
+    <value>Started</value>
+    <comment>Test listener started message.</comment>
+  </data>
   <data name="TestResultNotExecuted" xml:space="preserve">
     <value>Test not executed.</value>
     <comment>Displayed when test was not executed.</comment>
   </data>
   <data name="TestsPageAssertionStatus" xml:space="preserve">
     <value>Assertion Status: </value>
-    <comment>Lable uses for the Test page assertion status.</comment>
+    <comment>Label uses for the Test page assertion status.</comment>
   </data>
   <data name="TestsPageTestAssertionCount" xml:space="preserve">
     <value>Assert Count: </value>

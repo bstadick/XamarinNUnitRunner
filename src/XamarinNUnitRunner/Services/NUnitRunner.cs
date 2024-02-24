@@ -58,6 +58,9 @@ namespace XamarinNUnitRunner.Services
         public bool IsTestComplete => TestSuite.IsTestComplete;
 
         /// <inheritdoc />
+        public ITestListener TestListener { get; set; }
+
+        /// <inheritdoc />
         public ITest AddTestAssembly(Assembly assembly, IDictionary<string, object> settings = null)
         {
             if (assembly == null)

@@ -244,7 +244,8 @@ namespace XamarinNUnitRunner.ViewModels
             async Task RunCommand()
             {
                 // Run selected tests
-                ITestResult result = await TestRunner.RunTestsAsync(null, filter).ConfigureAwait(false);
+                ITestResult result =
+                    await TestRunner.RunTestsAsync(TestRunner.TestListener, filter).ConfigureAwait(false);
                 Result = new NUnitTestResult(result);
             }
 

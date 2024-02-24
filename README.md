@@ -9,6 +9,7 @@ Features include:
 - Exploring loaded tests by namespace, class, and method
 - Running tests and test cases individually or by namespace, class, or method
 - Viewing overall results and individual results with details
+- Writes output of test results to the console as tests are ran
 - Running tests on a background thread, leaving the GUI thread available to perform other work
 
 ## Usage
@@ -29,6 +30,14 @@ runner.AddTestAssembly(typeof(Test.Stub.TestFixtureStubOne).Assembly);
 LoadApplication(new App(runner));
 ```
 
+Add an ITestListener such as NUnitTestListener to the NUnitRunner to output tests messages and results as tests are ran.
+
+```csharp
+NUnitTestListener listener = new NUnitTestListener();
+listener.WriteOutput += Console.WriteLine;
+runner.TestListener = listener;
+```
+
 ## Build
 
 Use the provided solution and Visual Studio 2019 to build the project.
@@ -46,7 +55,7 @@ Example test runner projects can be found in the examples folder.
 - Exporting results to a file
 - Searching and filtering tests
 - Configuring test settings
-- Live updates/console as tests are progressing
+- Live updates as tests are progressing
 - Remote test management
 
 ## Contributing

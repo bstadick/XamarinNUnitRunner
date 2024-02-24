@@ -8,6 +8,7 @@ using NUnit.Framework.Internal;
 using Xamarin.Forms;
 using XamarinNUnitRunner.Models;
 using XamarinNUnitRunner.Services;
+using XamarinNUnitRunner.Test.Models;
 using XamarinNUnitRunner.Test.Stub;
 using XamarinNUnitRunner.ViewModels;
 using XamarinNUnitRunner.Views;
@@ -333,85 +334,6 @@ namespace XamarinNUnitRunner.Test.Views
 
             #endregion
         }
-
-        #endregion
-
-        #region Nested Class: TestForTest
-
-        /// <summary>
-        ///     Implementation of ITest for test.
-        /// </summary>
-        // ReSharper disable UnassignedGetOnlyAutoProperty
-        private class TestForTest : ITest
-        {
-            #region Implementation if ITest
-
-            /// <inheritdoc />
-            public TNode ToXml(bool recursive)
-            {
-                throw new NotImplementedException();
-            }
-
-            /// <inheritdoc />
-            public TNode AddToXml(TNode parentNode, bool recursive)
-            {
-                throw new NotImplementedException();
-            }
-
-            /// <inheritdoc />
-            public string Id { get; set; }
-
-            /// <inheritdoc />
-            public string Name { get; }
-
-            /// <inheritdoc />
-            public string TestType { get; }
-
-            /// <inheritdoc />
-            public string FullName { get; }
-
-            /// <inheritdoc />
-            public string ClassName { get; }
-
-            /// <inheritdoc />
-            public string MethodName { get; }
-
-            /// <inheritdoc />
-            public ITypeInfo TypeInfo { get; }
-
-            /// <inheritdoc />
-            public IMethodInfo Method { get; }
-
-            /// <inheritdoc />
-            public RunState RunState { get; }
-
-            /// <inheritdoc />
-            public int TestCaseCount { get; }
-
-            /// <inheritdoc />
-            public IPropertyBag Properties { get; }
-
-            /// <inheritdoc />
-            public ITest Parent { get; }
-
-            /// <inheritdoc />
-            public bool IsSuite { get; }
-
-            /// <inheritdoc />
-            public bool HasChildren { get; }
-
-            /// <inheritdoc />
-            public IList<ITest> Tests { get; }
-
-            /// <inheritdoc />
-            public object Fixture { get; }
-
-            /// <inheritdoc />
-            public object[] Arguments { get; }
-
-            #endregion
-        }
-        // ReSharper restore UnassignedGetOnlyAutoProperty
 
         #endregion
     }

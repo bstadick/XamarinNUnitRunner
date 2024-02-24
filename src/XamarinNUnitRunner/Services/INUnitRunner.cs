@@ -29,6 +29,11 @@ namespace XamarinNUnitRunner.Services
         /// </summary>
         bool IsTestComplete { get; }
 
+        /// <summary>
+        ///     Gets or sets a <see cref="ITestListener" /> for running tests.
+        /// </summary>
+        ITestListener TestListener { get; set; }
+
         #endregion
 
         #region Methods

@@ -42,7 +42,7 @@ namespace XamarinNUnitRunner.Test.Stub
         {
             // Basic test with output
             Console.WriteLine("Test message to display.");
-            Assert.IsTrue(true);
+            Assert.IsTrue(true, "Test result message to display.");
         }
 
         [Test]

@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
@@ -24,6 +25,12 @@ namespace XamarinNUnitRunner.Droid
             NUnitRunner runner = new NUnitRunner(GetType().Namespace);
             runner.AddTestAssembly(typeof(Test.Stub.TestFixtureStubOne).Assembly);
 
+            // Add a test listener to output results as tests are ran
+            NUnitTestListener listener = new NUnitTestListener();
+            listener.WriteOutput += Console.WriteLine;
+            runner.TestListener = listener;
+
+            // Load the Xamarin.Forms application with the test runner
             LoadApplication(new App(runner));
         }
 

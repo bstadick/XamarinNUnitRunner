@@ -259,6 +259,42 @@ namespace XamarinNUnitRunner.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finished.
+        /// </summary>
+        internal static string TestListenerFinished {
+            get {
+                return ResourceManager.GetString("TestListenerFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        internal static string TestListenerMessage {
+            get {
+                return ResourceManager.GetString("TestListenerMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output.
+        /// </summary>
+        internal static string TestListenerOutput {
+            get {
+                return ResourceManager.GetString("TestListenerOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started.
+        /// </summary>
+        internal static string TestListenerStarted {
+            get {
+                return ResourceManager.GetString("TestListenerStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test not executed..
         /// </summary>
         internal static string TestResultNotExecuted {

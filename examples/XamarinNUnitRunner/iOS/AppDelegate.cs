@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using System;
+using Foundation;
 using UIKit;
 using XamarinNUnitRunner.Services;
 
@@ -27,6 +28,12 @@ namespace XamarinNUnitRunner.iOS
             NUnitRunner runner = new NUnitRunner(GetType().Namespace);
             runner.AddTestAssembly(typeof(Test.Stub.TestFixtureStubOne).Assembly);
 
+            // Add a test listener to output results as tests are ran
+            NUnitTestListener listener = new NUnitTestListener();
+            listener.WriteOutput += Console.WriteLine;
+            runner.TestListener = listener;
+
+            // Load the Xamarin.Forms application with the test runner
             LoadApplication(new App(runner));
 
             return base.FinishedLaunching(app, options);

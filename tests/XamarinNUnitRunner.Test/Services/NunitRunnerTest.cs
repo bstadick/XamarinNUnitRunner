@@ -21,6 +21,25 @@ namespace XamarinNUnitRunner.Test.Services
         // Tests for TestSuite Property are covered by Constructor tests.
         // Tests for IsTestRunning and IsTestComplete Properties are covered by RunTestsAsync tests.
 
+        #region Tests for TestListener
+
+        [Test]
+        public void TestTestListenerPropertyGetsAndSetsITestListener()
+        {
+            ITestListener listener = new NUnitTestListener();
+
+            const string name = "suite-name";
+            NUnitRunner runner = new NUnitRunner(name);
+
+            Assert.IsNull(runner.TestListener);
+
+            runner.TestListener = listener;
+
+            Assert.AreSame(listener, runner.TestListener);
+        }
+
+        #endregion
+
         #region Tests for Constructor
 
         [Test]
@@ -612,7 +631,7 @@ namespace XamarinNUnitRunner.Test.Services
                 expectedState = withFilter ? ResultState.Success : ResultState.ChildFailure;
             }
 
-            TestListenerForTest listener = withListener ? new TestListenerForTest() : null;
+            NUnitTestListener listener = withListener ? new NUnitTestListener() : null;
 
             INUnitRunner runner = new NUnitRunner("suite-name");
             Assembly assembly = typeof(TestFixtureStubOne).Assembly;
@@ -669,7 +688,7 @@ namespace XamarinNUnitRunner.Test.Services
                 expectedState = withFilter ? ResultState.Success : ResultState.ChildFailure;
             }
 
-            TestListenerForTest listener = withListener ? new TestListenerForTest() : null;
+            NUnitTestListener listener = withListener ? new NUnitTestListener() : null;
 
             INUnitRunner runner = new NUnitRunner("suite-name");
             Assembly assembly = typeof(TestFixtureStubOne).Assembly;
@@ -726,7 +745,7 @@ namespace XamarinNUnitRunner.Test.Services
                 expectedState = withFilter ? ResultState.Success : ResultState.ChildFailure;
             }
 
-            TestListenerForTest listener = withListener ? new TestListenerForTest() : null;
+            NUnitTestListener listener = withListener ? new NUnitTestListener() : null;
 
             INUnitRunner runner = new NUnitRunner("suite-name");
             Assembly assembly = typeof(TestFixtureStubOne).Assembly;
@@ -781,7 +800,7 @@ namespace XamarinNUnitRunner.Test.Services
         public void
             TestRunTestsAsyncWithAlreadyRunningTestWaitsForPreviousCompletionAndThenRunsTestsAndReturnsTheRanTests()
         {
-            TestListenerForTest listener = new TestListenerForTest();
+            NUnitTestListener listener = new NUnitTestListener();
 
             NUnitSuiteForTest suite = new NUnitSuiteForTest("suite-name");
             TestAssemblyRunnerForTest assemblyRunner = new TestAssemblyRunnerForTest();
@@ -839,7 +858,7 @@ namespace XamarinNUnitRunner.Test.Services
                 expectedState = withFilter ? ResultState.Success : ResultState.ChildFailure;
             }
 
-            TestListenerForTest listener = withListener ? new TestListenerForTest() : null;
+            NUnitTestListener listener = withListener ? new NUnitTestListener() : null;
 
             INUnitRunner runner = new NUnitRunner("suite-name");
             Assembly assembly = typeof(TestFixtureStubOne).Assembly;
